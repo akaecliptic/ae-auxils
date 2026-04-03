@@ -26,6 +26,12 @@ public class JSON {
         BOOLEAN, NULL
     }
 
+    public static class JsonParserException extends RuntimeException {
+        public JsonParserException(String message) {
+            super(message);
+        }
+    }
+
     // Interface to ensure all components can be pretty printed
     interface PrettyPrintable {
         String prettyString(int depth);
@@ -591,7 +597,7 @@ public class JSON {
             }
 
             if (ambiguous.type() == TokenType.ERR) {
-                throw new RuntimeException(ambiguous.literal());
+                throw new JsonParserException(ambiguous.literal());
             }
 
             _token = ambiguous;
