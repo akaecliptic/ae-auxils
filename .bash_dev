@@ -1,0 +1,15 @@
+# alias
+alias lart='ls -lart'
+alias la='ls -lah'
+alias indev='cd ~/dev'
+alias dockerpurge='docker rm $(docker ps -a -q -f status=exited)'
+alias dockerinfo='docker ps --format "table {{.ID}} {{.Image}}\t {{.Names}}\t {{.RunningFor}}\t {{.State}}\t {{.Status}}" -a'
+alias showports='sudo lsof -i -P -n | grep LISTEN'
+alias terraform='docker run --rm -it -w $PWD -v $PWD:$PWD -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY hashicorp/terraform:1.14'
+alias dockerlogin='aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
+alias picat='~/dev/tools/picat'
+
+#functions
+function dockershell() {
+	docker exec -it $1 /bin/bash
+}
